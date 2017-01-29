@@ -18,11 +18,13 @@ namespace FluToDo.ViewModels
 
             this.LoadTodosCommand = new Command(async () => { await this.todoManager.LoadTodosAsync(); });
             this.NewTodoCommand = new Command(async () => { await App.NavigationService.PushAsync(new TodoCreationPage()); });
+            this.DeleteCommand = new Command<TodoViewModel>(async (todo) => { await this.todoManager.DeleteTodoAsync(todo); });
         }
 
         public ObservableCollection<TodoViewModel> TodoList { get; private set; }
 
         public ICommand LoadTodosCommand { get; private set; }
         public ICommand NewTodoCommand { get; private set; }
+        public ICommand DeleteCommand { get; private set; }
     }
 }

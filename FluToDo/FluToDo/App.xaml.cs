@@ -15,7 +15,8 @@ namespace FluToDo
         {
             InitializeComponent();
             TodoRestService ToDoService = new TodoRestService(Constants.ToDoRestUrl, new HttpHandler());
-            TodoManager = new TodoManager(ToDoService);
+            IAlertService alertService = new AlertService();
+            TodoManager = new TodoManager(ToDoService, alertService);
             NavigationPage navPage = new NavigationPage(new TodoListPage());
             MainPage = navPage;
             NavigationService = new NavigationService(navPage);

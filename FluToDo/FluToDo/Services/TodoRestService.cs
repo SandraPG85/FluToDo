@@ -54,5 +54,11 @@ namespace FluToDo.Services
             HttpResponseMessage response = null;
             response = await client.PostAsync(uri, content);
         }
+
+        public async Task DeleteToDoItemAsync(string id)
+        {
+            Uri uri = new Uri(string.Format(this.apiUrl, id));
+            var response = await client.DeleteAsync(uri);
+        }
     }
 }

@@ -18,5 +18,10 @@ namespace FluToDo.Services
         /// Saves the todo asynchronously to the remote service
         /// </summary>
         Task SaveToDoItemAsync(TodoItem item);
+
+        /// <summary>
+        /// Deletes a todo asynchronously to the remote service
+        /// </summary>
+        Task DeleteToDoItemAsync(string id);
     }
 }

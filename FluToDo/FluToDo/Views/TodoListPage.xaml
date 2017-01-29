@@ -10,6 +10,9 @@
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
+            <ViewCell.ContextActions>
+              <MenuItem Command="{Binding Source={x:Reference listView}, Path=BindingContext.DeleteCommand}" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
+            </ViewCell.ContextActions>
             <StackLayout Padding="20,0,0,0" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
               <Label Text="{Binding Name}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"  />
               <StackLayout Padding="15,0,20,0" HorizontalOptions="EndAndExpand" Orientation="Horizontal">
