@@ -23,5 +23,10 @@ namespace FluToDo.Services
         /// Deletes a todo asynchronously to the remote service
         /// </summary>
         Task DeleteToDoItemAsync(string id);
+
+        /// <summary>
+        /// Updates a todo asynchronously to the remote service
+        /// </summary>
+        Task UpdateToDoItemAsync(string id);
     }
 }

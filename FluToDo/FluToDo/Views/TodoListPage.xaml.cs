@@ -23,5 +23,13 @@ namespace FluToDo.Views
 
             await Task.Run(() => this.viewModel.LoadTodosCommand.Execute(null));
         }
+
+        void OnTapped(object sender, ItemTappedEventArgs e)
+        {
+            if (e.Item != null)
+            {
+                this.viewModel.DoneCommand.Execute(e.Item);
+            }
+        }
     }
 }

@@ -29,5 +29,10 @@ namespace FluToDo.Core
         /// Deletes a todo and updates the remote service
         /// </summary>
         Task DeleteTodoAsync(TodoViewModel todo);
+
+        /// <summary>
+        /// Updates a todo and updates the remote service
+        /// </summary>
+        Task UpdateTodoAsync(TodoViewModel todo);
     }
 }

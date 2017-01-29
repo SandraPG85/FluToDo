@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,16 +16,18 @@ namespace FluToDo.Services
         private readonly IHttpHandler client;
         private readonly string apiUrl;
 
+        private List<TodoItem> items;
 
         public TodoRestService(string apiUrl, IHttpHandler client)
         {
             this.apiUrl = apiUrl;
             this.client = client;
+            this.items = new List<TodoItem>();
         }
 
         public async Task<List<TodoItem>> RefreshDataAsync()
         {
-            List<TodoItem> Items = new List<TodoItem>();
+            this.items.Clear();
 
             var uri = new Uri(string.Format(this.apiUrl, string.Empty));
             try
@@ -33,7 +36,7 @@ namespace FluToDo.Services
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    Items = JsonConvert.DeserializeObject<List<TodoItem>>(content);
+                    this.items = JsonConvert.DeserializeObject<List<TodoItem>>(content);
                 }
             }
             catch (Exception ex)
@@ -41,7 +44,7 @@ namespace FluToDo.Services
                 Debug.WriteLine(@"				ERROR {0}", ex.Message);
             }
 
-            return Items;
+            return this.items;
         }
 
         public async Task SaveToDoItemAsync(TodoItem item)
@@ -59,6 +62,18 @@ namespace FluToDo.Services
         {
             Uri uri = new Uri(string.Format(this.apiUrl, id));
             var response = await client.DeleteAsync(uri);
+        }
+
+        public async Task UpdateToDoItemAsync(string id)
+        {
+            Uri uri = new Uri(string.Format(this.apiUrl, id));
+
+            TodoItem item = this.items.Where(x => x.Key == id).First();
+            string json = JsonConvert.SerializeObject(item);
+            StringContent content = new StringContent(json, Encoding.UTF8, Constants.JsonMediaType);
+
+            HttpResponseMessage response = null;
+            response = await client.PutAsync(uri, content);
         }
     }
 }

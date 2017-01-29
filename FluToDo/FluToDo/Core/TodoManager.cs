@@ -47,5 +47,11 @@ namespace FluToDo.Core
             await Task.WhenAll(this.todoRestService.DeleteToDoItemAsync(todo.Id),
                                 this.alertService.DisplayAlert("Delete", "ToDo item " + todo.Name + " has been deleted correctly", "OK"));
         }
+
+        public async Task UpdateTodoAsync(TodoViewModel todo)
+        {
+            todo.Done = !todo.Done;
+            await this.todoRestService.UpdateToDoItemAsync(todo.Id);
+        }
     }
 }

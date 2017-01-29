@@ -5,7 +5,7 @@
   <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
 
   <StackLayout HorizontalOptions="StartAndExpand">
-    <ListView IsPullToRefreshEnabled="true" x:Name="listView" ItemsSource="{Binding TodoList}">
+    <ListView IsPullToRefreshEnabled="true" x:Name="listView" ItemsSource="{Binding TodoList}" ItemTapped="OnTapped">
 
       <ListView.ItemTemplate>
         <DataTemplate>

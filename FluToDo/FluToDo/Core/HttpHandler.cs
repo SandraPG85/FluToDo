@@ -28,5 +28,10 @@ namespace FluToDo.Core
         {
             return await _client.DeleteAsync(url);
         }
+
+        public async Task<HttpResponseMessage> PutAsync(Uri url, HttpContent content)
+        {
+            return await _client.PutAsync(url, content);
+        }
     }
 }
