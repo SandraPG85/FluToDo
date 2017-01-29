@@ -1,4 +1,5 @@
-﻿using FluToDo.ViewModels;
+﻿using FluToDo.Models;
+using FluToDo.ViewModels;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace FluToDo.Core
     /// <summary>
     /// Manages the todo list
     /// </summary>
-    internal interface ITodoManager
+    public interface ITodoManager
     {
         /// <summary>
         /// Initializes the manger with the todo list collection
@@ -18,5 +19,10 @@ namespace FluToDo.Core
         /// Loads the todo list collection asynchronously
         /// </summary>
         Task LoadTodosAsync();
+
+        /// <summary>
+        /// Creates a todo and updates the remote service
+        /// </summary>
+        Task CreateTodoAsync(string item);
     }
 }

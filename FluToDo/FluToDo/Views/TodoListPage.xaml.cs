@@ -13,7 +13,7 @@ namespace FluToDo.Views
         public TodoListPage()
         {
             InitializeComponent();
-            this.viewModel = new TodoListViewModel(new TodoManager(App.ToDoService));
+            this.viewModel = new TodoListViewModel(App.TodoManager);
             base.BindingContext = this.viewModel;
         }
 

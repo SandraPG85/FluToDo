@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FluToDo.Views.TodoCreationPage">
+
+  <StackLayout HorizontalOptions="FillAndExpand">
+
+    <StackLayout Padding="10,0,10,0">
+      <Label Text="Name" FontSize="Large" FontAttributes="Bold"/>
+      <Entry Placeholder="task name" Text="{Binding Path=Name}"/>
+    </StackLayout>
+
+    <StackLayout VerticalOptions="EndAndExpand">
+      <Button Text="Create" Command="{Binding CreateCommand}"/>
+    </StackLayout>
+    
+  </StackLayout>
+  
+</ContentPage>

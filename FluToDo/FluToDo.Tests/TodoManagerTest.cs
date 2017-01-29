@@ -37,5 +37,25 @@ namespace FluToDo.Tests
             Assert.AreEqual(1, todoList.Count);
             Assert.AreEqual("Test", todoList[0].Name);
         }
+
+        [TestMethod]
+        public void CreateTodosAsync_HostAvailable_RetrieveOk()
+        {
+            // Arrange
+            INavigationService navService = MockRepository.GenerateMock<INavigationService>();
+            App.NavigationService = navService;
+            TodoItem todo = new TodoItem() { Name = "Test", Key = "key" };
+
+            ITodoRestService todoService = MockRepository.GenerateMock<ITodoRestService>();
+
+            todoService.Expect(s => s.SaveToDoItemAsync(Arg<TodoItem>.Matches(i => i.Name == "item1"))).Repeat.Once();
+            
+            // Act
+            ITodoManager sut = new TodoManager(todoService);
+            sut.CreateTodoAsync("item1");
+
+            // Assert
+            todoService.VerifyAllExpectations();
+        }
     }
 }

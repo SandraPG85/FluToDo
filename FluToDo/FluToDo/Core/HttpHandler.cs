@@ -18,5 +18,10 @@ namespace FluToDo.Core
         {
             return await _client.GetAsync(url);
         }
+
+        public async Task<HttpResponseMessage> PostAsync(Uri url, HttpContent content)
+        {
+            return await _client.PostAsync(url, content);
+        }
     }
 }

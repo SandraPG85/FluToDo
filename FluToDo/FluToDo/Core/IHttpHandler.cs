@@ -13,5 +13,10 @@ namespace FluToDo.Core
         /// Get a response asynchronosuly from a given Uri
         /// </summary>
         Task<HttpResponseMessage> GetAsync(Uri url);
+
+        /// <summary>
+        /// Posts a request asynchronosuly to the given Uri
+        /// </summary>
+        Task<HttpResponseMessage> PostAsync(Uri url, HttpContent content);
     }
 }

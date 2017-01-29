@@ -4,6 +4,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FluToDo.Services
@@ -40,6 +42,17 @@ namespace FluToDo.Services
             }
 
             return Items;
+        }
+
+        public async Task SaveToDoItemAsync(TodoItem item)
+        {
+            Uri uri = new Uri(string.Format(this.apiUrl, string.Empty));
+
+            string json = JsonConvert.SerializeObject(item);
+            StringContent content = new StringContent(json, Encoding.UTF8, Constants.JsonMediaType);
+
+            HttpResponseMessage response = null;
+            response = await client.PostAsync(uri, content);
         }
     }
 }

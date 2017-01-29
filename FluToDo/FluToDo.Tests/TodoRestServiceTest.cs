@@ -35,5 +35,22 @@ namespace FluToDo.Tests
             Assert.AreEqual(1, items.Count);
             Assert.AreEqual("Item1", items[0].Name);
         }
+
+        [TestMethod]
+        public async Task SaveToDoItemAsync_HostAvailable_RetrieveItemsOk()
+        {
+            // Arrange
+            IHttpHandler httpHanlder = MockRepository.GenerateMock<IHttpHandler>();
+            ITodoRestService sut = new TodoRestService("http://1.1.1.1", httpHanlder);
+            TodoItem todo = new TodoItem() { Name = "Test", Key = "key" };
+
+            httpHanlder.Expect(http => http.PostAsync(null, null)).IgnoreArguments().Repeat.Once().Return(Task.FromResult(new HttpResponseMessage()));
+
+            // Act
+            await sut.SaveToDoItemAsync(todo);
+
+            // Assert
+            httpHanlder.VerifyAllExpectations();
+        }
     }
 }

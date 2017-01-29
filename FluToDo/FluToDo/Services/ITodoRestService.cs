@@ -13,5 +13,10 @@ namespace FluToDo.Services
         /// Retrieve the data asynchronously from the remote service
         /// </summary>
         Task<List<TodoItem>> RefreshDataAsync();
+
+        /// <summary>
+        /// Saves the todo asynchronously to the remote service
+        /// </summary>
+        Task SaveToDoItemAsync(TodoItem item);
     }
 }

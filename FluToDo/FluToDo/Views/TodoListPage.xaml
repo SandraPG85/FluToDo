@@ -21,6 +21,8 @@
       </ListView.ItemTemplate>
       
     </ListView>
+
+    <Button Text="New" Command="{Binding NewTodoCommand}"/>
     
   </StackLayout>
   

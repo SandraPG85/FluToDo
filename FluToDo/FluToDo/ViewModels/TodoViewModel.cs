@@ -2,7 +2,7 @@
 
 namespace FluToDo.ViewModels
 {
-    internal class TodoViewModel : ViewModelBase
+    public class TodoViewModel : ViewModelBase
     {
         private TodoItem todoItem;
 

@@ -8,14 +8,17 @@ namespace FluToDo
 {
     public partial class App : Application
     {
-        public static ITodoRestService ToDoService { get; private set; }
+        public static ITodoManager TodoManager { get; private set; }
+        public static INavigationService NavigationService { get; set; }
 
         public App()
         {
             InitializeComponent();
-            ToDoService = new TodoRestService(Constants.ToDoRestUrl, new HttpHandler());
+            TodoRestService ToDoService = new TodoRestService(Constants.ToDoRestUrl, new HttpHandler());
+            TodoManager = new TodoManager(ToDoService);
             NavigationPage navPage = new NavigationPage(new TodoListPage());
             MainPage = navPage;
+            NavigationService = new NavigationService(navPage);
         }
 
         protected override void OnStart()
